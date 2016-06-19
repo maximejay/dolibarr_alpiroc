@@ -1,0 +1,78 @@
+# Dolibarr language file - Source file is en_US - main
+DIRECTION=ltr
+# Note for Chinese:
+# msungstdlight or cid0ct are for traditional Chinese (traditional does not render with Ubuntu pdf reader)
+# stsongstdlight or cid0cs are for simplified Chinese
+# To read Chinese pdf with Linux: sudo apt-get install poppler-data
+FONTFORPDF=helvetica
+FONTSIZEFORPDF=10
+titre_fiche=Here the settings page of Alpiroc module
+Description_Aliproc=Alpiroc module offer a new way to present propal and invoices documents. The settings of this module allow you to custom the view and the content of these documents. Here bellow is the descritpion of these various possibilities :<br /> -  Build personalised profil which can be selected when you are editing the invoice and or the proposal <br /> - Write titles directly on the proposal and invoice and build different sections <br /> - Display the sub-total at the end of each section <br /> - Select table columns you want to display <br /> - It offer a  basic deposit managment <br /> - You can choose to hide or display sevrals parts of these documents such as the payment condition, the public note, a thanks sentence, the signature area, the private note of the compagny <br /> - Display a skew draft headband <br /> - Write automaticly a reminder letter from the invoice and the proposal documents
+dispprivatenote=Display the private note
+SelectHead=Headers selection (some options may not available for both headers)
+description_generale=Configuration of commercial proposals, orders and invoices
+AdresseChantier=Work localisation
+ContactChantier=Refer to
+BonPourAccord=Agreement
+SignatureClient=Signature
+SignatureAcceptation=Signing this offer leads you to accept this comercial proposal and the selling terms and conditions
+affichemmemr=Display the mention Mss, M. before the name of the customer
+MmeMr=Mss, M.
+#
+GestionCVG=General selling condition managment (GSC)
+file_cvg=The current PDF document of the GSC is
+boutton_cvg=Bind the GSC to the document queue
+WarningCGV=Warning, some pdf file are not readable for some reason... this will crash the document generation
+#
+#
+option_paymentdone=Display the payment that have already been done
+#
+#
+Le=the
+A=at
+acompte=Deposit to pay when ordering (percent of the total cost)
+display_acompte=Mention that a deposit have to be paid
+VersementAcompte=Deposit
+VersementAcompte=Payment of
+ComplementVersement= when ordering, that is to say
+Euros=Euros
+Phrase_Remerciement=Personal closing sentence at the bottom of the document
+Titre_1=Title located above the public note
+Titre_2=Title located above the the person in charge of the commercial proposal
+option_sign_aera=Display a signing aera (always disable on the invoices)
+AddRemerciement=Whrite your own grateful sentence
+zone_remerciement=Display a grateful sentence at the bottom of the document
+position_adresse=Align the recipient address to the right
+display_mode_reglement=Display payment mode
+display_cond_reglement=Affiche payment conditions
+display_slogan=Display the private note of the compagny
+display_pu_qtx=Display the columns unit price and quantity
+display_tva=Display the TVA column
+repeat_header=Display header on all document pages
+Object=Object
+SousTotal=Sub-total
+display_sous_totaux=Display sub-total
+GestionDesTemplate=Profil management
+TemplateSelection=setting up profil
+Supprimer=Delete
+Selectionner=Select
+Creer=Create
+CreerNouvelleTemplate=Create a new template
+SelectOrSuppr=Select the profil you want to edit or delete it
+Nomexistant=Failure : The profil already exist or the name of the profil can't be empty !
+Brouillon=DRAFT
+display_brouillon=Display a "draft" headband
+boutton_rappel=Only display total prices and then create a reminder letter
+GestionDesImpayes=Reminder payment management
+phrase_rappel_dessus=Reminder sentence located above the total
+phrase_rappel_dessous=Reminder sentence located below the total
+option_contact=Display a contact following a customisable title
+option_notepublic=Display the public note following a customisable title
+RappelFacturation=payment reminder
+Date=Date
+DejaPaye=Paid deposit
+TotalRestantDu=Remaining total
+remove_settings=Remove all module settings
+click_remove_settings=Click here to remove all module settings
+desc_suppr_settings=Alpiroc settings have been removed... disable and enable the module again to restore initial configuration
+hidedetails=Hide product details when the price is null (only write a description)
