@@ -1,0 +1,68 @@
+# Dolibarr language file - Source file is en_US - main
+DIRECTION=ltr
+# Note for Chinese:
+# msungstdlight or cid0ct are for traditional Chinese (traditional does not render with Ubuntu pdf reader)
+# stsongstdlight or cid0cs are for simplified Chinese
+# To read Chinese pdf with Linux: sudo apt-get install poppler-data
+FONTFORPDF=helvetica
+FONTSIZEFORPDF=10
+titre_fiche=Configurar el módulo
+Description_Aliproc=Description_Aliproc=El módulo Alpiroc propone una nueva presentación de documentos, proposiciones comerciales y facturas, construida con la base del modelo Azur. El módulo es parametrable y permite modificar el contenido de los documentos. Estas son las diferentes funcionalidades del módulo: <br /> - Creación de perfiles personalizados que se pueden escoger durante la redacción de proposiciones comerciales y facturas <br /> - Escritura de títulos dentro de dichos documentos <br /> - visualización de sub totales por secciones (entre dos títulos insertados) <br /> - Elección de columnas visibles en el panel que lista los productos o servicios propuestos  <br /> - estión de anticipos pagados al realizar el pedido <br /> - Visualización o no de ciertas partes de los documentos (condiciones de pago, anotaciones públicas, frases de agradecimiento, zona de firma, anotaciones privadas de la empresa...) <br /> - Visualización de borrador <br /> - Creación de cartas de advertencia a partir de una factura o de una proposión comercial impagada
+dispprivatenote=Visualiza la private note
+SelectHead=selección Cabecera (some options may not available for both heads)
+description_generale=Configurar proposiciones comerciales, pedido y facturas
+AdresseChantier=Dirección de la obra
+ContactChantier=contacto
+BonPourAccord=Aceptación acuerdo
+SignatureClient=firma
+SignatureAcceptation=La firma de esta oferta por el cliente equivala a la aceptación del presupuesto y las condiciones generales de la venta
+Le=el
+A=en
+affichemmemr=Display the mention Mme, M. before the name of the customer
+MmeMr=Mme, M.
+acompte=Anticipo (en porcentaje) a pagar al hacer el pedido
+VersementAcompte=Pago del anticipo
+display_acompte=Visualiza una frase para indicar el anticipo a pagar
+DebutVersement=Pago de
+ComplementVersement=del pedido, del valor
+Euros=Euros
+Phrase_Remerciement=Frase de agradecimiento a pie de página
+Titre_1=Título situado por encima de la nota pública
+Titre_2=Título situado  por encima de la personas a cargo de la proposión comercial
+option_sign_aera=Visualizar una zona de firma abajo y a la derecha del documento (siempre desactivada en as facturas)
+AddRemerciement=Gracias por su confianza
+zone_remerciement=Visualizar frase de agradecimiento al final de la página
+position_adresse=Ajustar la dirección del destinatario a la derecha del cuadro
+display_mode_reglement=Visualizar el modo de pago
+display_cond_reglement=Visualizar las condiciones de pago
+display_slogan=Visualizar la anotación privada de la empresa
+display_pu_qtx=Visualizar las columnas precio unitario y cantidad
+display_tva=Visualizar la columna TVA
+repeat_header=Encabezado Ver banderau en todas las páginas de los documentos
+Objet=Objeto
+SousTotal=Sub-total
+display_sous_totaux=Visualizar sub-totales entre dos títulos insertados
+GestionDesTemplate=Gestión de perfiles
+TemplateSelection=Modificación perfil
+Supprimer=suprimir
+Selectionner=Seleccionar
+Creer=Creer
+CreerNouvelleTemplate=Crear un nuevo template
+SelectOrSuppr=Seleccionar el template que desee modificar o suprimir 
+Nomexistant=Fallo : el perfil ya existe o el nombre del perfil no puede estar vacio!
+Brouillon=BORRADOR
+display_brouillon=Visualizar una ventana « borrador » en medio de la página
+boutton_rappel=Visualizar solamente los totales con una frase de descripción, con el fin de crear una nota de advertencia
+GestionDesImpayes=Gestión de advertencias de facturas impagadas
+phrase_rappel_dessus=Frase de advertencia situada por encima del total a pagar
+phrase_rappel_dessous=Frase de advertencia situada por debajo del total a pagar
+option_contact=Visualizar un contacto precedido de un título parametrable
+option_notepublic=Visualizar la anotación pública precedida de un título parametrable
+RappelFacturation=Advertencia de pago
+Date=Fecha
+DejaPaye=Adelantos dados a cuenta
+TotalRestantDu=Total restante debido
+remove_settings=suprimir todos los parámetro
+click_remove_settings=Click here to remove all module settings
+desc_suppr_settings=Alpiroc settings have been removed... disable and enable the module again to restore initial configuration
+hidedetails=Hide product details when the price is null (only write a description)

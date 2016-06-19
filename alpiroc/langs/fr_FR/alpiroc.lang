@@ -1,0 +1,81 @@
+# Dolibarr language file - Source file is en_US - main
+DIRECTION=ltr
+# Note for Chinese:
+# msungstdlight or cid0ct are for traditional Chinese (traditional does not render with Ubuntu pdf reader)
+# stsongstdlight or cid0cs are for simplified Chinese
+# To read Chinese pdf with Linux: sudo apt-get install poppler-data
+FONTFORPDF=helvetica
+FONTSIZEFORPDF=10
+titre_fiche=Voici la page de configuration du module Alpiroc
+Description_Aliproc=Le module Alpiroc propose une nouvelle présentation des documents propositions commerciales et factures construite sur la base du modèle Azur. Le module est paramétrable et vous permet de modifier le contenu de ces documents. Voici les différentes fonctionnalités du module :<br /> - La création de profils personnalisés dont le choix est possible lors de la rédaction des propositions commerciales et des factures. <br /> - L'écriture de titres au sein de ces documents <br /> - L'affichage des sous totaux par rubrique (entre deux titres insérés) <br /> - Le choix des colonnes à afficher dans le tableau listant les produits ou service vendu  <br /> - La gestion d'acompte à verser à la commande <br /> - Afficher ou non certaines parties des documents (les conditions de règlement, la note public, une phrase de remerciement, une zone de signature, la note privée de l'entreprise...)<br /> - L'affichage d'une banderolle brouillon <br /> - La création d'une lettre de rappel à partir d'une facture ou d'une proposition commerciale impayée.
+#
+#
+#
+#Traduction importante pour l'utilisateur : 
+#Modifiez la traduction à droite du signe égale (Ne pas modifier la partie gauche). Avant de faire des modifications, faite une sauvegarde du fichier :)
+#
+#
+AdresseChantier=Adresse du chantier
+Adressee_a=Adressée à
+MmeMr=Mme, M.
+ContactChantier=Contact
+BonPourAccord=Bon pour accord
+SignatureAcceptation=La signature de cette offre par le client aura valeur d'acceptation du devis et des conditions générales de vente
+VersementAcompte=Versement d'un acompte
+SignatureClient=Signature
+DebutVersement=Versement de
+ComplementVersement=à la commande, soit 
+Euros=Euros
+#
+#
+#
+#
+#
+dispprivatenote=Afficher la note privé
+SelectHead=Sélection de l'entête (certaines options ne sont pas disponible pour les deux)
+description_generale=Configurer les propositions commerciales, les commandes et les factures
+affichemmemr=Afficher la mention Mme, M. devant le nom du tier
+Le=Le
+A=à
+acompte=Acompte en pourcentage du montant total à verser à la commande
+display_acompte=Affiche une phrase pour signaler un acompte à verser
+Phrase_Remerciement=Phrase de remerciement situé en bas de page
+Titre_1=Titre situé au dessus de la note public
+Titre_2=Titre situé au dessus des personnes en charge de la proposition commerciale
+option_sign_aera=Afficher une zone de signature en bas à droite du document (toujours désactivé sur les factures)
+AddRemerciement=En vous remerciant de votre confiance
+zone_remerciement=Afficher une phrase de remerciement en bas de page
+position_adresse=Aligne l'adresse du destinataire à droite du cadre
+display_mode_reglement=Affiche le mode de règlement
+display_cond_reglement=Affiche les conditions de règlement
+display_slogan=Affiche la note privé de l'entreprise
+display_pu_qtx=Afficher les colonnes prix unitaire et quantité
+display_tva=Afficher la colonne indiquant la TVA
+repeat_header=Afficher le banderau d'entête sur toutes les pages des documents
+Objet=Objet
+SousTotal=Sous-total
+display_sous_totaux=Afficher les sous-totaux entre deux titres insérés
+GestionDesTemplate=Gestion des profils
+TemplateSelection=modification du profil
+Supprimer=Supprimer
+Selectionner=Selectionner
+Creer=Creer
+CreerNouvelleTemplate=Creer une nouvelle template
+SelectOrSuppr=Selectionner la template que vous souhaitez modifiez ou supprimez la
+Nomexistant=Echec : Le profil existe déja ou le nom du profil ne peut être vide !
+Brouillon=BROUILLON
+display_brouillon=Affiche une banderolle "brouillon" en travers de la page
+boutton_rappel=Affiche seulement les totaux avec une phrase de description afin de créer une lettre de rappel
+GestionDesImpayes=Gestion des rappels des factures impayées
+phrase_rappel_dessus=Phrase de rappel située au dessus du total à régler
+phrase_rappel_dessous=Phrase de rappel située au dessous du total à régler
+option_contact=Affiche un contact précédé d'un titre paramétrable
+option_notepublic=Affiche la note public précédé d'un titre paramétrable
+RappelFacturation=Rappel de paiement
+Date=Date
+DejaPaye=Acomptes déja versés
+TotalRestantDu=Total restant dû
+remove_settings=Supprimer tous les paramètres du module
+click_remove_settings=Cliquer ici pour supprimer tous les paramètres
+desc_suppr_settings=Tous les paramètres ont été supprimés... désactiver et ré-activer le module pour restaurer la configuration initiale
+hidedetails=Cacher les détails d'une ligne lorsque le prix est zero (permet d'écrire une description)
