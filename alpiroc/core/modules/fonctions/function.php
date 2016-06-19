@@ -49,3 +49,36 @@ function pdfBuildThirdpartyNameAlpiroc($thirdparty, Translate $outputlangs)
 
 	return $outputlangs->convToOutputCharset($socname);
 }
+
+
+
+/**
+ * Returns the name of the thirdparty
+ *
+ * @param Societe|Contact $thirdparty Contact or thirdparty
+ * @param Translate $outputlangs Output language
+ * @return string
+ */
+ 
+function pdfFileCheckCGV($file){
+	$name=$file["name"];
+	$type=$file["type"];
+	$tmp_dir=$file["tmp_name"];
+	$size=$file["size"];
+	$error_code=$file["error"];
+	
+	if (stristr($type,"pdf")==FALSE){
+		print("Error : The file is not a pdf... : ".$type);
+		return FALSE;
+	}
+	if ($size>1000000){
+		print("Error : The CGV need to be a pdf less than 1 Mo... : ".$size);
+		return FALSE;
+	}
+	if ($error_code!=0){
+		print("Error : other error... : ".$error_code);
+		return FALSE;
+	}
+	
+	return TRUE;
+}

@@ -278,6 +278,9 @@ class pdf_alpiroc extends ModelePDFPropales
 			$alpiroc->fetchValueFromProfil("affichemmemr",$this->profil);
 			$this->option_affichemmemr=$alpiroc->content;//Affichage Mme,Mr devant le nom
 			
+			$alpiroc->fetchValueFromProfil("cvg",$this->profil);
+			$this->option_cvg=$alpiroc->content;//Joint les CVG
+			
 		
 		}else{
 			//Default value
@@ -300,6 +303,7 @@ class pdf_alpiroc extends ModelePDFPropales
 			$this->option_head="alpiroc";
 			$this->option_dispprivatenote=0;
 			$this->option_affichemmemr=0;
+			$this->option_cvg=0;
 		}
 		//Une variable global non défini existe pour ne pas répéter l'header, on l'utilise. 
 			if ($this->option_repeat_head==0){
@@ -955,6 +959,28 @@ class pdf_alpiroc extends ModelePDFPropales
 				// Pied de page
 				$this->_pagefoot($pdf,$object,$outputlangs);
 				if (method_exists($pdf,'AliasNbPages')) $pdf->AliasNbPages();
+
+
+				// Condition Generale de Vente
+				// Ajout des CGV dans la propale
+				// Par Philippe SAGOT (philazerty) le 21/09/2012
+				if ($this->option_cvg==1 && file_exists(DOL_DATA_ROOT."/mycompany/cgv.pdf")){
+					$pagecount = $pdf->setSourceFile(DOL_DATA_ROOT."/mycompany/cgv.pdf");
+					for ($i = 1; $i <= $pagecount; $i++) {
+						$tplidx = $pdf->ImportPage($i);
+						$s = $pdf->getTemplatesize($tplidx);
+						$pdf->AddPage('P', array($s['w'], $s['h']));
+						$pdf->useTemplate($tplidx);
+						// Ajout du watermark (brouillon)
+						if ($object->statut==0 && (!empty($conf->global->FACTURE_DRAFT_WATERMARK))) {
+							pdf_watermark($pdf,$outputlangs,$this->page_hauteur,$this->page_largeur,'mm',$conf->global->FACTURE_DRAFT_WATERMARK);
+							$pdf->SetTextColor(0,0,60);
+						}
+						// Ajout du footer / pied de page
+						pdf_pagefoot($pdf,$outputlangs,'',$this->emetteur,$this->marge_basse,$this->marge_gauche,$this->page_hauteur,$object);
+					}
+                }
+
 
 				$pdf->Close();
 

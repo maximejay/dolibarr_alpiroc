@@ -31,6 +31,15 @@ Euros=Euros
 #
 #
 #
+GestionCVG=Gestion des conditions générales de vente (CGV)
+file_cvg=Le document PDF des CGV actuellement sélectionné est
+boutton_cvg=Joindre les CGV à la fin des documents
+WarningCGV=(Attention certains pdf ne sont pas comptibles et font planter dolibarr)
+#
+#
+option_paymentdone=Afficher les paiements déja effectués
+#
+#
 dispprivatenote=Afficher la note privé
 SelectHead=Sélection de l'entête (certaines options ne sont pas disponible pour les deux)
 description_generale=Configurer les propositions commerciales, les commandes et les factures

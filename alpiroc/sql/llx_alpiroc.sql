@@ -46,6 +46,9 @@ create table if not exists llx_alpiroc
   head     	varchar(25) DEFAULT "alpiroc", -- a dummy custom field
   dispprivatenote     	int(11) DEFAULT NULL, -- a dummy custom field
   affichemmemr     	int(11) DEFAULT NULL, -- a dummy custom field
+  cvg     	int(11) DEFAULT NULL, -- a dummy custom field
+  cvg_doc     	varchar(512) DEFAULT NULL, -- a dummy custom field
+  paymentdone     	int(11) DEFAULT NULL, -- a dummy custom field
   PRIMARY KEY (rowid),
   UNIQUE (name)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 ;
@@ -57,3 +60,6 @@ ALTER TABLE llx_alpiroc ADD hidedetails int(11) ;
 ALTER TABLE llx_alpiroc ADD head varchar(25) ;
 ALTER TABLE llx_alpiroc ADD dispprivatenote int(11) ;
 ALTER TABLE llx_alpiroc ADD affichemmemr int(11) ;
+ALTER TABLE llx_alpiroc ADD cvg int(11) ;
+ALTER TABLE llx_alpiroc ADD cvg_doc varchar(512) ;
+ALTER TABLE llx_alpiroc ADD paymentdone int(11) ;

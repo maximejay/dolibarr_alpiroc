@@ -20,6 +20,16 @@ Le=el
 A=en
 affichemmemr=Display the mention Mme, M. before the name of the customer
 MmeMr=Mme, M.
+#
+GestionCVG=General selling condition managment (GSC)
+file_cvg=The current PDF document of the GSC is
+boutton_cvg=Bind the GSC to the document queue
+WarningCGV=Warning, some pdf file are not readable for some reason... this will crash the document generation
+#
+#
+option_paymentdone=Display the payment that have already been done
+#
+#
 acompte=Anticipo (en porcentaje) a pagar al hacer el pedido
 VersementAcompte=Pago del anticipo
 display_acompte=Visualiza una frase para indicar el anticipo a pagar

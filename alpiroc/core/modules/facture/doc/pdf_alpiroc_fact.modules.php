@@ -164,6 +164,13 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 		{
 			$object->fetch_thirdparty();
 
+
+			// Frédéric Roux pour show versement
+			$deja_regle = $object->getSommePaiement();
+			$amount_credit_notes_included = $object->getSumCreditNotesUsed();
+			$amount_deposits_included = $object->getSumDepositsUsed();
+			// Frédéric Roux pour show versement
+			
 			// $deja_regle = 0;
 
 			// Definition of $dir and $file
@@ -281,7 +288,12 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 			$alpiroc->fetchValueFromProfil("affichemmemr",$this->profil);
 			$this->option_affichemmemr=$alpiroc->content;//Affichage Mme,Mr devant le nom
 			
-		
+			$alpiroc->fetchValueFromProfil("cvg",$this->profil);
+			$this->option_cvg=$alpiroc->content;//Joint les CVG
+			
+			$alpiroc->fetchValueFromProfil("paymentdone",$this->profil);
+			$this->option_paymentdone=$alpiroc->content;//Affiche les paiements déja effectués
+			
 		}else{
 			//Default value
 			$this->option_modereg=1;
@@ -303,6 +315,8 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 			$this->option_head="alpiroc";
 			$this->option_dispprivatenote=0;
 			$this->option_affichemmemr=0;
+			$this->option_cvg=0;
+			$this->option_paymentdone=0;
 		}
 		//Une variable global non défini existe pour ne pas répéter l'header, on l'utilise. 
 			if ($this->option_repeat_head==0){
@@ -933,6 +947,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 					$pdf->SetXY($posX, $posy+4);
 					$pdf->SetFont('','',$default_font_size);
 					$pdf->writeHTMLCell($this->page_largeur-$this->marge_droite-$this->marge_gauche, 3, $posX, $posy+4, dol_htmlentitiesbr($alpiroc->content), 0, 1,false,true,'L');
+					$posy=$pdf->GetY()+5;
 					
 				}else{
 					
@@ -948,16 +963,39 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 				
 				
 				// Affiche zone versements
-				/*
-				if ($deja_regle)
-				{
-					$posy=$this->_tableau_versements($pdf, $object, $posy, $outputlangs);
+				if ($this->option_paymentdone==1){
+					if ($deja_regle || $amount_credit_notes_included || $amount_deposits_included)
+					{
+						$posy=$this->_tableau_versements($pdf, $object, $posy, $outputlangs);
+					}
 				}
-				*/
+				
 
 				// Pied de page
 				$this->_pagefoot($pdf,$object,$outputlangs);
 				if (method_exists($pdf,'AliasNbPages')) $pdf->AliasNbPages();
+
+				
+				// Condition Generale de Vente
+				// Ajout des CGV dans la propale
+				// Par Philippe SAGOT (philazerty) le 21/09/2012
+				if ($this->option_cvg==1 && file_exists(DOL_DATA_ROOT."/mycompany/cgv.pdf")){
+					$pagecount = $pdf->setSourceFile(DOL_DATA_ROOT."/mycompany/cgv.pdf");
+					for ($i = 1; $i <= $pagecount; $i++) {
+						$tplidx = $pdf->ImportPage($i);
+						$s = $pdf->getTemplatesize($tplidx);
+						$pdf->AddPage('P', array($s['w'], $s['h']));
+						$pdf->useTemplate($tplidx);
+						// Ajout du watermark (brouillon)
+						if ($object->statut==0 && (!empty($conf->global->FACTURE_DRAFT_WATERMARK))) {
+							pdf_watermark($pdf,$outputlangs,$this->page_hauteur,$this->page_largeur,'mm',$conf->global->FACTURE_DRAFT_WATERMARK);
+							$pdf->SetTextColor(0,0,60);
+						}
+						// Ajout du footer / pied de page
+						pdf_pagefoot($pdf,$outputlangs,'',$this->emetteur,$this->marge_basse,$this->marge_gauche,$this->page_hauteur,$object);
+					}
+                }
+
 
 				$pdf->Close();
 
@@ -995,6 +1033,9 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 		return 0;   // Erreur par defaut
 	}
 
+
+
+
 	/**
 	 *  Show payments table
 	 *
@@ -1004,10 +1045,136 @@ class pdf_alpiroc_fact extends ModelePDFFactures
      *  @param  Translate	$outputlangs    Object langs for output
      *  @return int             			<0 if KO, >0 if OK
 	 */
+	// Frédéric Roux Show Versement	 
 	function _tableau_versements(&$pdf, $object, $posy, $outputlangs)
 	{
-		
+		global $conf;
+
+        $sign=1;
+        if ($object->type == 2 && ! empty($conf->global->INVOICE_POSITIVE_CREDIT_NOTE)) $sign=-1;
+
+        $tab3_posx = 120;
+		$tab3_top = $posy + 8;
+		$tab3_width = 80;
+		$tab3_height = 4;
+		if ($this->page_largeur < 210) // To work with US executive format
+		{
+			$tab3_posx -= 20;
+		}
+
+		$default_font_size = pdf_getPDFFontSize($outputlangs);
+
+		$title=$outputlangs->transnoentities("PaymentsAlreadyDone");
+		if ($object->type == 2) $title=$outputlangs->transnoentities("PaymentsBackAlreadyDone");
+
+		$pdf->SetFont('','', $default_font_size - 3);
+		$pdf->SetXY($tab3_posx, $tab3_top - 4);
+		$pdf->MultiCell(60, 3, $title, 0, 'L', 0);
+
+		$pdf->line($tab3_posx, $tab3_top, $tab3_posx+$tab3_width, $tab3_top);
+
+		$pdf->SetFont('','', $default_font_size - 4);
+		$pdf->SetXY($tab3_posx, $tab3_top);
+		$pdf->MultiCell(20, 3, $outputlangs->transnoentities("Payment"), 0, 'L', 0);
+		$pdf->SetXY($tab3_posx+21, $tab3_top);
+		$pdf->MultiCell(20, 3, $outputlangs->transnoentities("Amount"), 0, 'L', 0);
+		$pdf->SetXY($tab3_posx+40, $tab3_top);
+		$pdf->MultiCell(20, 3, $outputlangs->transnoentities("Type"), 0, 'L', 0);
+		$pdf->SetXY($tab3_posx+58, $tab3_top);
+		$pdf->MultiCell(20, 3, $outputlangs->transnoentities("Num"), 0, 'L', 0);
+
+		$pdf->line($tab3_posx, $tab3_top-1+$tab3_height, $tab3_posx+$tab3_width, $tab3_top-1+$tab3_height);
+
+		$y=0;
+
+		$pdf->SetFont('','', $default_font_size - 4);
+
+		// Loop on each deposits and credit notes included
+		$sql = "SELECT re.rowid, re.amount_ht, re.amount_tva, re.amount_ttc,";
+		$sql.= " re.description, re.fk_facture_source,";
+		$sql.= " f.type, f.datef";
+		$sql.= " FROM ".MAIN_DB_PREFIX ."societe_remise_except as re, ".MAIN_DB_PREFIX ."facture as f";
+		$sql.= " WHERE re.fk_facture_source = f.rowid AND re.fk_facture = ".$object->id;
+		$resql=$this->db->query($sql);
+		if ($resql)
+		{
+			$num = $this->db->num_rows($resql);
+			$i=0;
+			$invoice=new Facture($this->db);
+			while ($i < $num)
+			{
+				$y+=3;
+				$obj = $this->db->fetch_object($resql);
+
+				if ($obj->type == 2) $text=$outputlangs->trans("CreditNote");
+				elseif ($obj->type == 3) $text=$outputlangs->trans("Deposit");
+				else $text=$outputlangs->trans("UnknownType");
+
+				$invoice->fetch($obj->fk_facture_source);
+
+				$pdf->SetXY($tab3_posx, $tab3_top+$y);
+				$pdf->MultiCell(20, 3, dol_print_date($obj->datef,'day',false,$outputlangs,true), 0, 'L', 0);
+				$pdf->SetXY($tab3_posx+21, $tab3_top+$y);
+				$pdf->MultiCell(20, 3, price($obj->amount_ttc, 0, $outputlangs), 0, 'L', 0);
+				$pdf->SetXY($tab3_posx+40, $tab3_top+$y);
+				$pdf->MultiCell(20, 3, $text, 0, 'L', 0);
+				$pdf->SetXY($tab3_posx+58, $tab3_top+$y);
+				$pdf->MultiCell(20, 3, $invoice->ref, 0, 'L', 0);
+
+				$pdf->line($tab3_posx, $tab3_top+$y+3, $tab3_posx+$tab3_width, $tab3_top+$y+3);
+
+				$i++;
+			}
+		}
+		else
+		{
+			$this->error=$this->db->lasterror();
+			return -1;
+		}
+
+		// Loop on each payment
+		$sql = "SELECT p.datep as date, p.fk_paiement as type, p.num_paiement as num, pf.amount as amount,";
+		$sql.= " cp.code";
+		$sql.= " FROM ".MAIN_DB_PREFIX."paiement_facture as pf, ".MAIN_DB_PREFIX."paiement as p";
+		$sql.= " LEFT JOIN ".MAIN_DB_PREFIX."c_paiement as cp ON p.fk_paiement = cp.id";
+		$sql.= " WHERE pf.fk_paiement = p.rowid AND pf.fk_facture = ".$object->id;
+		$sql.= " ORDER BY p.datep";
+		$resql=$this->db->query($sql);
+		if ($resql)
+		{
+			$num = $this->db->num_rows($resql);
+			$i=0;
+			while ($i < $num) {
+				$y+=3;
+				$row = $this->db->fetch_object($resql);
+
+				$pdf->SetXY($tab3_posx, $tab3_top+$y);
+				$pdf->MultiCell(20, 3, dol_print_date($this->db->jdate($row->date),'day',false,$outputlangs,true), 0, 'L', 0);
+				$pdf->SetXY($tab3_posx+21, $tab3_top+$y);
+				$pdf->MultiCell(20, 3, price($sign * $row->amount, 0, $outputlangs), 0, 'L', 0);
+				$pdf->SetXY($tab3_posx+40, $tab3_top+$y);
+				$oper = $outputlangs->transnoentitiesnoconv("PaymentTypeShort" . $row->code);
+
+				$pdf->MultiCell(20, 3, $oper, 0, 'L', 0);
+				$pdf->SetXY($tab3_posx+58, $tab3_top+$y);
+				$pdf->MultiCell(30, 3, $row->num, 0, 'L', 0);
+
+				$pdf->line($tab3_posx, $tab3_top+$y+3, $tab3_posx+$tab3_width, $tab3_top+$y+3);
+
+				$i++;
+			}
+		}
+		else
+		{
+			$this->error=$this->db->lasterror();
+			return -1;
+		}
+
 	}
+
+
+
+
 
 	/**
 	 *   Show confirmation box and a conlusion sentence

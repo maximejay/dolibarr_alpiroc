@@ -46,6 +46,7 @@ if (! $res) die("Include of main fails");
 include_once (DOL_DOCUMENT_ROOT .'/alpiroc/sql/alpiroc.class.php');
 include_once DOL_DOCUMENT_ROOT .'/core/modules/DolibarrModules.class.php';
 require_once(DOL_DOCUMENT_ROOT."/core/class/commonobject.class.php");
+include_once(DOL_DOCUMENT_ROOT.'/alpiroc/core/modules/fonctions/function.php');
 
 
 // Load traductions files requiredby by page
@@ -73,8 +74,8 @@ if ($user->societe_id > 0)
 * Put here all code to do according to value of "action" parameter
 ********************************************************************/
 $options=array(
-	"azur"=>array("thanksarea","notepublic","displayacompte","signaturearea","dispreglement","dispcondreglement","displaypuqtx","disptva","hidedetails","soustotaux","repeathead","brouillon","rappel","dispprivatenote"),
-	"alpiroc"=>array("thanksarea","notepublic","contact","displayacompte","signaturearea","posadresse","dispreglement","dispcondreglement","dispslogan","displaypuqtx","disptva","hidedetails","soustotaux","repeathead","brouillon","rappel","dispprivatenote","affichemmemr")
+	"azur"=>array("thanksarea","notepublic","displayacompte","signaturearea","dispreglement","dispcondreglement","displaypuqtx","disptva","hidedetails","soustotaux","repeathead","brouillon","rappel","dispprivatenote","paymentdone"),
+	"alpiroc"=>array("thanksarea","notepublic","contact","displayacompte","signaturearea","posadresse","dispreglement","dispcondreglement","dispslogan","displaypuqtx","disptva","hidedetails","soustotaux","repeathead","brouillon","rappel","dispprivatenote","affichemmemr","paymentdone")
 );
 
 
@@ -476,7 +477,27 @@ if ($module_active){
 			print '</td>';
 		}
 
-
+		//Bouton activation des payments deja effectuée
+		if (in_array("paymentdone",$options[$head],true)){
+			print '<tr> </tr>';
+			print '</br>';
+			$object=new Alpiroc($db);
+			$object->fetchValueFromSelectedTemplate("paymentdone");
+			if ($object->content) {$value_default=$object->content;}else{$value_default="0";}
+			print '<td align="left">'."\n".$langs->trans("option_paymentdone") ." : \n";
+			if ($value_default==1){
+				print '<a href="'.$_SERVER["PHP_SELF"].'?action=switch&value='."paymentdone_0".'">';
+				print img_picto($langs->trans("Enabled"),'switch_on');
+				print '</a>';
+			}
+			else
+			{
+				print '<a href="'.$_SERVER["PHP_SELF"].'?action=switch&amp;value='."paymentdone_1".'">';
+				print img_picto($langs->trans("Disabled"),'switch_off');
+				print '</a>';
+			}
+			print '</td>';
+		}
 
 		//Bouton pour definir le positionnement de l'adresse dans le cadre
 		if (in_array("posadresse",$options[$head],true)){
@@ -728,6 +749,87 @@ if ($module_active){
 
 
 
+
+// #############################################"
+//      CONDITION GENERALE DE VENTE
+// #############################################"
+		if (count($_FILES)>0){
+			//Lors de l'import d'un fichier, celui-ci est stoké ds un repertoire tmp. La variable _FILES permet d'y acceder
+			$info_file=$_FILES["fichier"];
+			
+			//Gestion des erreurs et contraintes sur le format et la taille
+			//Fontion renvoie true or false
+			$fileOK=pdfFileCheckCGV($info_file);
+			
+			if ($fileOK){
+				//Copy les CGV vers...
+				$tmp_dir=$info_file["tmp_name"];
+				copy($tmp_dir,DOL_DATA_ROOT."/mycompany/cgv.pdf");
+				
+				$object=new Alpiroc($db);
+				$object->content=$info_file["name"];
+				$object->name="cvg_doc";
+				$object->profil=$profil;
+				$result=$object->update();
+			}
+		}
+
+		
+		print '<table class="noborder" width="100%">';
+		print '<tr class="liste_titre">';
+		print '<td>'.$langs->trans("GestionCVG")." - ".$langs->trans("WarningCGV").' </td>'."\n";
+		print '<td> </td>'."\n";
+		print '<td> </td>'."\n";
+
+		
+		print '<tr> </tr>';
+		$object=new Alpiroc($db);
+		$object->fetchValueFromSelectedTemplate("cvg");
+		if ($object->content) {$value_default=$object->content;}else{$value_default="0";}
+		print '<td align="left">'."\n".$langs->trans("boutton_cvg") ." : \n ";
+		if ($value_default==1){
+			print '<a href="'.$_SERVER["PHP_SELF"].'?action=switch&value='."cvg_0".'">';
+			print img_picto($langs->trans("Enabled"),'switch_on');
+			print '</a>';
+		}
+		else
+		{
+			print '<a href="'.$_SERVER["PHP_SELF"].'?action=switch&amp;value='."cvg_1".'">';
+			print img_picto($langs->trans("Disabled"),'switch_off');
+			print '</a>';
+		}
+		print '</td>';
+
+		print '</br>';
+
+
+		//CVG file (PDF)
+		$object=new Alpiroc($db);
+		$object->fetchValueFromSelectedTemplate("cvg_doc");
+		if ($object->content) {$value_default=$object->content;}else{$value_default="";}
+		
+		print '<td align="left">'."".$langs->trans("file_cvg") ." : ".$value_default;
+			print("<form method='post' action='".$_SERVER['PHP_SELF']."' "."enctype='multipart/form-data'>");
+			print("<div>");
+			//~ echo ("Import data file : ");
+			print("<input type='file' name='fichier' value='".$value_default."'/>");
+			print("<input type='submit' name='cvg_doc' value='".$langs->trans('Selectionner')."'/></br>");	
+			print("</div>");
+			print("</form>");
+		print '</td>';
+
+		print '</br>';
+		print '</table>';
+
+
+
+		print '</br>';
+
+
+
+// #############################################"
+//      RAPPEL IMPAYE
+// #############################################"
 		print '<table class="noborder" width="100%">';
 		print '<tr class="liste_titre">';
 		print '<td>'.$langs->trans("GestionDesImpayes").', '.$langs->trans("TemplateSelection").' : '.$profil.' </td>'."\n";
@@ -797,6 +899,9 @@ if ($module_active){
 
 
 
+// #############################################"
+//      DELETE DB
+// #############################################"
 		print '<table class="noborder" width="100%">';
 			print '<tr class="liste_titre">';
 			print '<td>'.$langs->trans("remove_settings").'</td>'."\n";

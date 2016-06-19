@@ -566,8 +566,8 @@ function update_profil()
 		}
 		
 		
-		$sql = "INSERT INTO ".MAIN_DB_PREFIX."alpiroc (name,remerciement,titre1,titre2,phraserappel,phraserappelfin,selected_template,acompte,signaturearea,thanksarea,displayacompte,posadresse,dispreglement,dispcondreglement,dispslogan,displaypuqtx,soustotaux,brouillon,rappel,notepublic,contact,disptva,repeathead,hidedetails,head,dispprivatenote,affichemmemr) ";
-		$sql.= "VALUES ('".$pseudo."','write your own sentence','Title of the public note','Contact or responsible','Reminder sentence','Reminder sentence','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1','1','1','0','alpiroc','1','1')";
+		$sql = "INSERT INTO ".MAIN_DB_PREFIX."alpiroc (name,remerciement,titre1,titre2,phraserappel,phraserappelfin,selected_template,acompte,signaturearea,thanksarea,displayacompte,posadresse,dispreglement,dispcondreglement,dispslogan,displaypuqtx,soustotaux,brouillon,rappel,notepublic,contact,disptva,repeathead,hidedetails,head,dispprivatenote,affichemmemr,cvg,cvg_doc,paymentdone) ";
+		$sql.= "VALUES ('".$pseudo."','write your own sentence','Title of the public note','Contact or responsible','Reminder sentence','Reminder sentence','1','0','0','0','0','0','0','0','0','0','0','0','0','1','1','1','1','0','alpiroc','1','1','0','','0')";
 		
 		$this->db->begin();
 		dol_syslog(get_class($this)."::create sql=".$sql, LOG_DEBUG);

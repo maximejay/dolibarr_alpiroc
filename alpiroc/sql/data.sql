@@ -27,6 +27,9 @@ UPDATE llx_alpiroc SET hidedetails='0' WHERE hidedetails IS NULL ;
 UPDATE llx_alpiroc SET head='alpiroc' WHERE head IS NULL ;
 UPDATE llx_alpiroc SET dispprivatenote='0' WHERE dispprivatenote IS NULL ;
 UPDATE llx_alpiroc SET affichemmemr='1' WHERE affichemmemr IS NULL ;
+UPDATE llx_alpiroc SET cvg='0' WHERE cvg IS NULL ;
+UPDATE llx_alpiroc SET cvg_doc='' WHERE cvg_doc IS NULL ;
+UPDATE llx_alpiroc SET paymentdone='0' WHERE paymentdone IS NULL ;
 
 INSERT INTO llx_extrafields (name,entity,elementtype,tms,label,type,size,fieldunique,fieldrequired,pos,param) VALUES ('titrealpiroc','1','propaldet',NULL,'Insérer un titre au dessus','varchar','255','0','0','0','a:1:{s:7:"options";a:1:{s:0:"";N;}}');
 INSERT INTO llx_extrafields (name,entity,elementtype,tms,label,type,size,fieldunique,fieldrequired,pos,param) VALUES ('titrealpiroc','1','facturedet',NULL,'Insérer un titre au dessus','varchar','255','0','0','0','a:1:{s:7:"options";a:1:{s:0:"";N;}}');
