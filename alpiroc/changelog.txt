@@ -1,3 +1,7 @@
+Version 1.2.7 (10/09/2016)
+-Corrige des problèmes de compatibilité avec dolibarr 4 (mais tout n'a pas été testé)
+- Ajoute l'adresse du dépot github dans la doc ou sont les sources du module : Les Contributeurs sont les bienvenus !
+
 Version 1.2.6 (13/03/2016)
 -Corrige le mauvais nom du repertoire lang en_GB. Ajoute le repertoir en_US dans la foulé
 

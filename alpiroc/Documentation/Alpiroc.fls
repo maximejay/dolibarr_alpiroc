@@ -86,10 +86,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
-INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/moreverb/moreverb.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/moreverb/moreverb.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
@@ -120,6 +116,10 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmr17.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmr12.tfm
 INPUT /usr/share/texmf/tex/latex/lm/ot1lmr.fd
@@ -194,6 +194,7 @@ INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtt10.tfm
 INPUT Alpiroc.aux
 INPUT ./Alpiroc.out
 INPUT ./Alpiroc.out
+INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb

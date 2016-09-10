@@ -34,13 +34,12 @@ function pdfBuildThirdpartyNameAlpiroc($thirdparty, Translate $outputlangs)
 
 	// On peut utiliser le nom de la societe du contact
 	if ($thirdparty instanceof Societe) {
+		$socname .= $thirdparty->name;
 		if (isset($thirdparty->name_alias)){//Test si la propriete existe pour rétro compatimbilité avec les version de dolibarr
 			if (!empty($thirdparty->name_alias)) {
 				$socname = $thirdparty->name_alias."\n";
 			}
 		}
-	
-		$socname .= $thirdparty->name;
 	} elseif ($thirdparty instanceof Contact) {
 		$socname = $thirdparty->socname;
 	} else {
