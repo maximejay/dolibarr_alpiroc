@@ -1954,14 +1954,18 @@ class pdf_alpiroc extends ModelePDFPropales
 
 			//Recipient name
 			// On peut utiliser le nom de la societe du contact
+			//dol_syslog("DOL_VERSION : ".DOL_VERSION." ".substr(DOL_VERSION,0,1),LOG_DEBUG);
+			
 			if ($usecontact && !empty($conf->global->MAIN_USE_COMPANY_NAME_OF_CONTACT)) {
 				$thirdparty = $object->contact;
+			} elseif (substr(DOL_VERSION,0,1)=="4") {
+				$thirdparty = $object->thirdparty;
 			} else {
 				$thirdparty = $object->client;
 			}
 
 			$carac_client_name= pdfBuildThirdpartyNameAlpiroc($thirdparty,$outputlangs);
-			$carac_client=pdf_build_address($outputlangs,$this->emetteur,$object->client,($usecontact?$object->contact:''),$usecontact,'target');
+			$carac_client=pdf_build_address($outputlangs,$this->emetteur,$thirdparty,($usecontact?$object->contact:''),$usecontact,'target');
 
 			// Show recipient
 			$widthrecbox=100;
@@ -1995,8 +1999,8 @@ class pdf_alpiroc extends ModelePDFPropales
 			// Show recipient name
 			//Si le client est un individu on ajoute la mention Mme Mr
 			if ($this->option_affichemmemr==1){
-				if (array_key_exists(typent_code,$object->client)){
-					if($object->client->typent_code=="TE_PRIVATE"){
+				if (array_key_exists(typent_code,$thirdparty)){
+					if($thirdparty->typent_code=="TE_PRIVATE"){
 						$carac_client_name=$outputlangs->transnoentities("MmeMr")." ".$carac_client_name;
 					}
 				}
@@ -2054,6 +2058,14 @@ class pdf_alpiroc extends ModelePDFPropales
 		$outputlangs->load("bills");
 		$outputlangs->load("propal");
 		$outputlangs->load("companies");
+		
+		
+		#we define $thirdparty depending the version of dolibarr
+		if (substr(DOL_VERSION,0,1)=="4") {
+			$thirdparty = $object->thirdparty;
+		}else{
+			$thirdparty = $object->client;
+		}
 
 		$default_font_size = pdf_getPDFFontSize($outputlangs);
 
@@ -2132,12 +2144,12 @@ class pdf_alpiroc extends ModelePDFPropales
 		$pdf->SetTextColor(0,0,60);
 		$pdf->MultiCell(100, 3, $outputlangs->transnoentities("DateEndPropal")." : " . dol_print_date($object->fin_validite,"day",false,$outputlangs,true), '', 'R');
 
-		if ($object->client->code_client)
+		if ($thirdparty->code_client)
 		{
 			$posy+=4;
 			$pdf->SetXY($posx,$posy);
 			$pdf->SetTextColor(0,0,60);
-			$pdf->MultiCell(100, 3, $outputlangs->transnoentities("CustomerCode")." : " . $outputlangs->transnoentities($object->client->code_client), '', 'R');
+			$pdf->MultiCell(100, 3, $outputlangs->transnoentities("CustomerCode")." : " . $outputlangs->transnoentities($thirdparty->code_client), '', 'R');
 		}
 
 		$posy+=2;
@@ -2158,7 +2170,7 @@ class pdf_alpiroc extends ModelePDFPropales
 		 		$carac_emetteur .= ($carac_emetteur ? "\n" : '' ).$outputlangs->transnoentities("Name").": ".$outputlangs->convToOutputCharset($object->user->getFullName($outputlangs))."\n";
 		 	}
 
-		 	$carac_emetteur .= pdf_build_address($outputlangs, $this->emetteur, $object->client);
+		 	$carac_emetteur .= pdf_build_address($outputlangs, $this->emetteur, $thirdparty);
 
 			// Show sender
 			$posy=max($posy_note_private+7,42);
@@ -2202,12 +2214,14 @@ class pdf_alpiroc extends ModelePDFPropales
 			// On peut utiliser le nom de la societe du contact
 			if ($usecontact && !empty($conf->global->MAIN_USE_COMPANY_NAME_OF_CONTACT)) {
 				$thirdparty = $object->contact;
+			} elseif (substr(DOL_VERSION,0,1)=="4") {
+				$thirdparty = $object->thirdparty;
 			} else {
 				$thirdparty = $object->client;
 			}
 
 			$carac_client_name= pdfBuildThirdpartyNameAlpiroc($thirdparty,$outputlangs);
-			$carac_client=pdf_build_address($outputlangs,$this->emetteur,$object->client,($usecontact?$object->contact:''),$usecontact,'target');
+			$carac_client=pdf_build_address($outputlangs,$this->emetteur,$thirdparty,($usecontact?$object->contact:''),$usecontact,'target');
 
 			// Show recipient
 			$widthrecbox=100;
