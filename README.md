@@ -11,4 +11,4 @@ Une brève docmumentation est fournie dans le répertoire "documentation"
 
 La branche master est la branche de developpement des prochaine version du module.
 
-La branche V1.2 correspond au code de la version 1.2 du module. La release est taggée 1.2.6 (correspondance la version sur le dolistore)
+La branche V1.2 correspond au code de la version 1.2 du module. La release est taggée 1.2.7 (correspondance la version sur le dolistore)
