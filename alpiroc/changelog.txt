@@ -1,3 +1,6 @@
+Version 1.2.8 (31/12/2016)
+- FIX : installation du module dans custom : include main failed
+
 Version 1.2.7 (10/09/2016)
 -Corrige des problèmes de compatibilité avec dolibarr 4 (mais tout n'a pas été testé)
 - Ajoute l'adresse du dépot github dans la doc ou sont les sources du module : Les Contributeurs sont les bienvenus !
