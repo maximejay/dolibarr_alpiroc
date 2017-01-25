@@ -2235,7 +2235,7 @@ class pdf_alpiroc extends ModelePDFPropales
 			//And we finally set posy as the final y position (posx probably useless)
 			$pdf->SetXY($this->marge_gauche,$posy);
 			if ($object->note_private!="" && $this->option_dispprivatenote==1){
-				$pdf->MultiCell(0, 4, $object->note_private, 0,"L");
+				$pdf->writeHTMLCell(0, 1,$this->marge_gauche,$posy, $object->note_private, 0,2);
 				$posy=$pdf->GetY()+5;
 			}
 			
@@ -2250,7 +2250,7 @@ class pdf_alpiroc extends ModelePDFPropales
 				$posy=$pdf->getY();
 				$pdf->SetXY($posx,$posy);
 				$pdf->SetFont('','', $default_font_size);
-				$pdf->MultiCell(0, 4, $object->note_public, 0,"L");
+				$pdf->writeHTMLCell(0, 1,$this->marge_gauche,$posy, $object->note_public, 0,2);
 				$posy=$pdf->GetY();
 			}
 			

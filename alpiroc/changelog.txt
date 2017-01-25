@@ -1,4 +1,7 @@
-Version 1.2.9 (19/01:2016)
+Version 1.2.10 (25/01/2017)
+- FIX : Problème note_publique et note privée wisiwig #3 
+
+Version 1.2.9 (19/01/2017)
 - FIX : Mauvais date d'échéance dans facture avec l'entête Azure
 
 Version 1.2.8 (31/12/2016)
