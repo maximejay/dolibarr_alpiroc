@@ -1931,7 +1931,7 @@ class pdf_alpiroc_com extends ModelePDFCommandes
 
 
 			#we define $thirdparty depending the version of dolibarr
-			if (substr(DOL_VERSION,0,1)=="4") {
+			if (substr(DOL_VERSION,0,1)>="4") {
 				$thirdparty = $object->thirdparty;
 			}else{
 				$thirdparty = $object->client;
@@ -2047,7 +2047,7 @@ class pdf_alpiroc_com extends ModelePDFCommandes
 		$outputlangs->load("companies");
 
 		#we define $thirdparty depending the version of dolibarr
-		if (substr(DOL_VERSION,0,1)=="4") {
+		if (substr(DOL_VERSION,0,1)>="4") {
 			$thirdparty = $object->thirdparty;
 		}else{
 			$thirdparty = $object->client;
