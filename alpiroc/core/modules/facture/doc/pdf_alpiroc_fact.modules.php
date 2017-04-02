@@ -2101,7 +2101,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 			// On peut utiliser le nom de la societe du contact
 			if ($usecontact && !empty($conf->global->MAIN_USE_COMPANY_NAME_OF_CONTACT)) {
 				$thirdparty = $object->contact;
-			} elseif (substr(DOL_VERSION,0,1)=="4") {
+			} elseif (substr(DOL_VERSION,0,1)>="4") {
 				$thirdparty = $object->thirdparty;
 			} else {
 				$thirdparty = $object->client;
@@ -2204,7 +2204,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 		$outputlangs->load("companies");
 
 		#we define $thirdparty depending the version of dolibarr
-		if (substr(DOL_VERSION,0,1)=="4") {
+		if (substr(DOL_VERSION,0,1)>="4") {
 			$thirdparty = $object->thirdparty;
 		}else{
 			$thirdparty = $object->client;
@@ -2285,7 +2285,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 		$posy+=4;
 		$pdf->SetXY($posx,$posy);
 		$pdf->SetTextColor(0,0,60);
-		$pdf->MultiCell(100, 3, $outputlangs->transnoentities("DateEndPropal")." : " . dol_print_date($object->fin_validite,"day",false,$outputlangs,true), '', 'R');
+        	$pdf->MultiCell(100, 3, $outputlangs->transnoentities("DateDue")." : " . dol_print_date($object->date_lim_reglement,"day",false,$outputlangs,true), '', 'R');
 
 		if ($thirdparty->code_client)
 		{
@@ -2357,7 +2357,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 			// On peut utiliser le nom de la societe du contact
 			if ($usecontact && !empty($conf->global->MAIN_USE_COMPANY_NAME_OF_CONTACT)) {
 				$thirdparty = $object->contact;
-			} elseif (substr(DOL_VERSION,0,1)=="4") {
+			} elseif (substr(DOL_VERSION,0,1)>="4") {
 				$thirdparty = $object->thirdparty;
 			} else {
 				$thirdparty = $object->client;
@@ -2404,7 +2404,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 			//And we finally set posy as the final y position (posx probably useless)
 			$pdf->SetXY($this->marge_gauche,$posy);
 			if ($object->note_private!="" && $this->option_dispprivatenote==1){
-				$pdf->MultiCell(0, 4, $object->note_private, 0,"L");
+                		$pdf->writeHTMLCell(0, 1,$this->marge_gauche,$posy, $object->note_private, 0,2);
 				$posy=$pdf->GetY()+5;
 			}
 			
@@ -2419,7 +2419,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 				$posy=$pdf->getY();
 				$pdf->SetXY($posx,$posy);
 				$pdf->SetFont('','', $default_font_size);
-				$pdf->MultiCell(0, 4, $object->note_public, 0,"L");
+                		$pdf->writeHTMLCell(0, 1,$this->marge_gauche,$posy, $object->note_public, 0,2);
 				$posy=$pdf->GetY();
 			}
 			

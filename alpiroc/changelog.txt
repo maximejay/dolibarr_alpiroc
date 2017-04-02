@@ -1,3 +1,31 @@
+
+Version 1.3.0 BETA 2 (2 AVRIL 2017)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% FUSION DES MODIF APPORTE depuis la branch 1.2
+%%% 2 AVRIL 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+VERSION 1.2.11 (20/03/2017)
+- FIX :  Fix : l'object $thirdparty n'était plus crée sur version 5 car un test de version de dolibarr pointait sur la version 4 uniquement.
+
+Version 1.2.10 (25/01/2017)
+- FIX : Problème note_publique et note privée wisiwig #3 
+
+Version 1.2.9 (19/01/2017)
+- FIX : Mauvais date d'échéance dans facture avec l'entête Azure
+
+Version 1.2.8 (31/12/2016)
+- FIX : installation du module dans custom : include main failed
+
+Version 1.2.7 (10/09/2016)
+-Corrige des problèmes de compatibilité avec dolibarr 4 (mais tout n'a pas été testé)
+- Ajoute l'adresse du dépot github dans la doc ou sont les sources du module : Les Contributeurs sont les bienvenus !
+
+Version 1.2.6 (13/03/2016)
+-Corrige le mauvais nom du repertoire lang en_GB. Ajoute le repertoir en_US dans la foulé
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 Version 1.3.0 BETA (26/01/2016)
 - Ajout des CGV avec option et selection du fichier pdf
 - Ajout du tableau des paiements deja versés avec une option
