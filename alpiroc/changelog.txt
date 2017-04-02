@@ -1,3 +1,6 @@
+VERSION 1.2.11 (20/03/2017)
+- FIX :  Fix : l'object $thirdparty n'était plus crée sur version 5 car un test de version de dolibarr pointait sur la version 4 uniquement.
+
 Version 1.2.10 (25/01/2017)
 - FIX : Problème note_publique et note privée wisiwig #3 
 
