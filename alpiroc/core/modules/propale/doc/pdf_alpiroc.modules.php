@@ -1999,7 +1999,7 @@ class pdf_alpiroc extends ModelePDFPropales
 			// Show recipient name
 			//Si le client est un individu on ajoute la mention Mme Mr
 			if ($this->option_affichemmemr==1){
-				if (array_key_exists(typent_code,$thirdparty)){
+				if (array_key_exists('typent_code',$thirdparty)){
 					if($thirdparty->typent_code=="TE_PRIVATE"){
 						$carac_client_name=$outputlangs->transnoentities("MmeMr")." ".$carac_client_name;
 					}
