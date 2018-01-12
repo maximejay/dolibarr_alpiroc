@@ -755,7 +755,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 						$this->localtax2[$localtax2_type][$localtax2_rate]+=$localtax2ligne;
 
 					if (($object->lines[$i]->info_bits & 0x01) == 0x01) $vatrate.='*';
-					if (! isset($this->tva[$vatrate]))				$this->tva[$vatrate]='';
+					if (! isset($this->tva[$vatrate]))				$this->tva[$vatrate]=0;
 					$this->tva[$vatrate] += $tvaligne;
 
 
@@ -921,7 +921,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 							$this->localtax2[$localtax2_type][$localtax2_rate]+=$localtax2ligne;
 
 						if (($object->lines[$i]->info_bits & 0x01) == 0x01) $vatrate.='*';
-						if (! isset($this->tva[$vatrate]))				$this->tva[$vatrate]='';
+						if (! isset($this->tva[$vatrate]))				$this->tva[$vatrate]=0;
 						$this->tva[$vatrate] += $tvaligne;
 					}
 					// Affiche zone totaux
@@ -2143,7 +2143,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 			// Show recipient name
 			//Si le client est un individu on ajoute la mention Mme Mr
 			if ($this->option_affichemmemr==1){
-				if (array_key_exists(typent_code,$thirdparty)){
+				if (array_key_exists('typent_code',$thirdparty)){
 					if($thirdparty->typent_code=="TE_PRIVATE"){
 						$carac_client_name=$outputlangs->transnoentities("MmeMr")." ".$carac_client_name;
 					}
