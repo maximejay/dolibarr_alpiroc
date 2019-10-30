@@ -2101,7 +2101,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 			// On peut utiliser le nom de la societe du contact
 			if ($usecontact && !empty($conf->global->MAIN_USE_COMPANY_NAME_OF_CONTACT)) {
 				$thirdparty = $object->contact;
-			} elseif (substr(DOL_VERSION,0,1)>="4") {
+			} elseif (version_compare(DOL_VERSION, "4.0.0")>=0) {
 				$thirdparty = $object->thirdparty;
 			} else {
 				$thirdparty = $object->client;
@@ -2204,7 +2204,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 		$outputlangs->load("companies");
 
 		#we define $thirdparty depending the version of dolibarr
-		if (substr(DOL_VERSION,0,1)>="4") {
+		if (version_compare(DOL_VERSION, "4.0.0")>=0) {
 			$thirdparty = $object->thirdparty;
 		}else{
 			$thirdparty = $object->client;
@@ -2357,7 +2357,7 @@ class pdf_alpiroc_fact extends ModelePDFFactures
 			// On peut utiliser le nom de la societe du contact
 			if ($usecontact && !empty($conf->global->MAIN_USE_COMPANY_NAME_OF_CONTACT)) {
 				$thirdparty = $object->contact;
-			} elseif (substr(DOL_VERSION,0,1)>="4") {
+			} elseif (version_compare(DOL_VERSION, "4.0.0")>=0) {
 				$thirdparty = $object->thirdparty;
 			} else {
 				$thirdparty = $object->client;

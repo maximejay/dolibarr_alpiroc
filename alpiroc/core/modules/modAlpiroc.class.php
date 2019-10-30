@@ -101,7 +101,7 @@ class modAlpiroc extends DolibarrModules
 
 		// Dependencies
 		$this->hidden = false;			// A condition to hide module
-		if (substr(DOL_VERSION,0,1)>="4") {
+		if (version_compare(DOL_VERSION, "4.0.0")>=0) {
 			$this->depends = array('modPropale','modFacture');		// List of modules id that must be enabled if this module is enabled
 		}else{
 		$this->depends = array('propal','invoice');		// List of modules id that must be enabled if this module is enabled
